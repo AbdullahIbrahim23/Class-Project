@@ -1,8 +1,10 @@
 let plat;
 let hero;
+let score;
 
 function setup(){
 	createCanvas(400,400);
+	score = 30;
 	let x_ = 100;
 	let y_ = 100;
 	let width = 150;
@@ -15,9 +17,12 @@ function setup(){
 }
 
 function draw(){
+	background("pink");
+	text("Score: "+score, 0, 10)
 	plat.show();
 	hero.show();
 	hero.move();
+	hero.bottom();
 }
 
 class Hero{
@@ -38,6 +43,9 @@ class Hero{
 	}
 	
 	move(){
+		if(plat.contains(this.x, this.y)){
+			this.y++;
+		}
 		if(keyIsDown(LEFT_ARROW)){
 			this.x -= 5;
 		}
@@ -49,6 +57,13 @@ class Hero{
 		}
 		if(keyIsDown(DOWN_ARROW)){
 			this.y += 5;
+		}
+	}
+	
+	bottom(){
+		if(this.y > height){
+			this.y = 0;
+			score--;
 		}
 	}
 }
@@ -66,5 +81,11 @@ class Platform{
 		strokeWeight(4);
 		fill(155);
 		rect(this.x, this.y, this.width, this.height);
+	}
+	
+	contains(givenX, givenY){
+		if(givenX > this.x && givenX < this.x+width && givenY > this.y && givenY < this.y+height){
+			return true	;
+		}
 	}
 }
