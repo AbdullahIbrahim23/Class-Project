@@ -1,10 +1,10 @@
 let plat;
 let hero;
-let score;
+let score = 30;
 
 function setup(){
-	createCanvas(400,400);
-	score = 30;
+	bg = loadImage("http://differenttruths.com/wp-content/uploads/2017/04/xElephant-4214115-720x400.jpg.pagespeed.ic.dn3ZO0Snp0.jpg");
+	createCanvas(720,400);
 	let x_ = 100;
 	let y_ = 100;
 	let width = 150;
@@ -17,7 +17,7 @@ function setup(){
 }
 
 function draw(){
-	background("pink");
+	background(bg);
 	text("Score: "+score, 0, 10)
 	plat.show();
 	hero.show();
@@ -43,7 +43,7 @@ class Hero{
 	}
 	
 	move(){
-		if(plat.contains(this.x, this.y)){
+		if(plat.contains(this.x, this.y) == false){
 			this.y++;
 		}
 		if(keyIsDown(LEFT_ARROW)){
@@ -83,9 +83,9 @@ class Platform{
 		rect(this.x, this.y, this.width, this.height);
 	}
 	
-	contains(givenX, givenY){
-		if(givenX > this.x && givenX < this.x+width && givenY > this.y && givenY < this.y+height){
-			return true	;
+	contains(givenX, givenY){ 
+		if(givenX > this.x && givenX < this.x+this.width && givenY > this.y && givenY < this.y+this.height){
+			return true;
 		}
 		return false;
 	}
