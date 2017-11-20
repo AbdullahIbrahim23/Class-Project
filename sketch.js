@@ -87,5 +87,6 @@ class Platform{
 		if(givenX > this.x && givenX < this.x+width && givenY > this.y && givenY < this.y+height){
 			return true	;
 		}
+		return false;
 	}
 }
